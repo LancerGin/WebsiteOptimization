@@ -517,13 +517,17 @@ function updatePositions() {
 }
 
 // 在页面滚动时运行updatePositions函数
-window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', function(){
+  requestAnimationFrame(updatePositions);
+});
 
 // 当页面加载时生成披萨滑窗
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  var height =  document.documentElement.clientHeight;
+  var n = (height / s) * cols;
+  for (var i = 0; i < n; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
